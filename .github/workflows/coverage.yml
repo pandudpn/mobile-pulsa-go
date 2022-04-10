@@ -11,13 +11,13 @@ jobs:
     name: Send coverage to coveralls
     steps:
       - uses: actions/checkout@v2
-      - name: setup
+      - name: Setup Go
         uses: actions/setup-go@v1
         with:
           go-version: "1.18"
       - run: go mod download
       - run: >
-          go test -race -covermode atomic -coverprofile=profile.cov \
+          go test -race -covermode atomic -coverprofile=coverage.out \
             . \
             ./pricelist/... \
       - name: Send coverage
@@ -25,4 +25,4 @@ jobs:
           COVERALLS_TOKEN: ${{ secrets.REPOSITORY_TOKEN }}
         run: |
           go get github.com/mattn/goveralls
-          $(go env GOPATH)/bin/goveralls -coverprofile=profile.cov -service=github
+          $HOME/gopath/bin/goveralls -coverprofile=coverage.out -service=github
