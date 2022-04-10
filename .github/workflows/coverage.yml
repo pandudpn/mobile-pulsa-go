@@ -1,4 +1,4 @@
-name: "coveralls"
+name: "Test Coverage"
 
 on:
   push:
