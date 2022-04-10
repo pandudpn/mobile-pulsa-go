@@ -27,7 +27,7 @@ type request struct {
 
 func (r *request) GetPriceList(ctx context.Context) (*mobilepulsa.PriceList, error) {
 	var (
-		priceList *mobilepulsa.PriceList
+		priceList mobilepulsa.PriceList
 		header    http.Header
 		err       error
 		url       string
@@ -55,5 +55,5 @@ func (r *request) GetPriceList(ctx context.Context) (*mobilepulsa.PriceList, err
 		return nil, err
 	}
 	
-	return priceList, nil
+	return &priceList, nil
 }
