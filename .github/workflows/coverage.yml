@@ -10,19 +10,18 @@ jobs:
     runs-on: ubuntu-latest
     name: Send coverage to coveralls
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Setup Go
-        uses: actions/setup-go@v1
+        uses: actions/setup-go@v3
         with:
           go-version: "1.18"
       - run: go mod download
       - run: >
-          go test -race -covermode atomic -coverprofile=coverage.out \
-            . \
-            ./pricelist/... \
+          go test -race -covermode atomic -coverprofile=coverage.out ./...
       - name: Send coverage
         env:
           COVERALLS_TOKEN: ${{ secrets.REPOSITORY_TOKEN }}
         run: |
+          export PATH=$PATH:$(go env GOPATH)/bin
           go get github.com/mattn/goveralls
           $HOME/gopath/bin/goveralls -coverprofile=coverage.out -service=github
