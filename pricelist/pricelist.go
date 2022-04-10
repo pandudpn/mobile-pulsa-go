@@ -2,7 +2,7 @@ package pricelist
 
 import (
 	"context"
-	
+
 	mobilepulsa "github.com/pandudpn/mobile-pulsa-go"
 )
 
@@ -11,12 +11,12 @@ func Get(data *PriceListParam, opts *mobilepulsa.Option) (*mobilepulsa.PriceList
 	data.Sign = opts.Sign("pl")
 	data.Username = opts.GetUsername()
 	data.Commands = "pricelist-pasca"
-	
+
 	r := &request{
 		data: data,
 		opts: opts,
 	}
-	
+
 	return r.GetPriceList(context.Background())
 }
 
@@ -25,11 +25,11 @@ func GetWithContext(ctx context.Context, data *PriceListParam, opts *mobilepulsa
 	data.Sign = opts.Sign("pl")
 	data.Username = opts.GetUsername()
 	data.Commands = "pricelist-pasca"
-	
+
 	r := &request{
 		data: data,
 		opts: opts,
 	}
-	
+
 	return r.GetPriceList(ctx)
 }

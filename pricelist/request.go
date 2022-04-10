@@ -3,7 +3,7 @@ package pricelist
 import (
 	"context"
 	"net/http"
-	
+
 	mobilepulsa "github.com/pandudpn/mobile-pulsa-go"
 	"github.com/pandudpn/mobile-pulsa-go/utils/validator"
 )
@@ -36,7 +36,7 @@ func (r *request) GetPriceList(ctx context.Context) (*mobilepulsa.PriceList, err
 	if err != nil {
 		return nil, err
 	}
-	
+
 	if r.data.Service == Postpaid {
 		url = basePostpaidProduction + priceListPostpaid
 		if r.opts.GetAccessType() == mobilepulsa.Development {
@@ -49,11 +49,11 @@ func (r *request) GetPriceList(ctx context.Context) (*mobilepulsa.PriceList, err
 		}
 	}
 	r.data.Sign = r.opts.Sign("pl")
-	
+
 	err = r.opts.GetAPIRequest().Call(ctx, http.MethodPost, url, header, r.data, &priceList)
 	if err != nil {
 		return nil, err
 	}
-	
+
 	return &priceList, nil
 }

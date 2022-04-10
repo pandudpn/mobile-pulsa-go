@@ -62,7 +62,7 @@ var (
 	ErrAPIKeyNil     = errors.New("api-key is nil")
 	ErrUsernameNil   = errors.New("username is nil")
 	ErrParseFailed   = errors.New("failed parse error response")
-	
+
 	// Error from response
 	ErrInvoicePaid             ErrorCode = errors.New("invoice already paid")                                  // 01
 	ErrBillUnpaid              ErrorCode = errors.New("bill unpaid")                                           // 02
@@ -119,7 +119,7 @@ func getErrorCode(v string) ErrorCode {
 	if !ok {
 		return ErrParseFailed
 	}
-	
+
 	return errCode
 }
 
@@ -140,16 +140,16 @@ type DataError struct {
 // ErrorHttp it will parse error message from Response "rc" into error type
 func ErrorHttp(respBody []byte) ErrorCode {
 	var errResponse ErrorResponse
-	
+
 	err := json.Unmarshal(respBody, &errResponse)
 	if err != nil {
 		return err
 	}
-	
+
 	var rc = errResponse.Data.ResponseCode
 	if rc == "" {
 		rc = errResponse.Data.RC
 	}
-	
+
 	return getErrorCode(rc)
 }

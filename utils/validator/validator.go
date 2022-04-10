@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"strings"
-	
+
 	gpv "github.com/go-playground/validator/v10"
 )
 
@@ -20,7 +20,7 @@ func ValidateRequired(ctx context.Context, value interface{}) error {
 	if !ok {
 		return err
 	}
-	
+
 	var missingFields []string
 	for _, e := range errs {
 		if e.Tag() == requiredTag {

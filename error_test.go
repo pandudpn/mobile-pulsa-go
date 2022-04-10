@@ -3,7 +3,7 @@ package mobilepulsa_test
 import (
 	"errors"
 	"testing"
-	
+
 	"github.com/go-playground/assert/v2"
 	mobilepulsa "github.com/pandudpn/mobile-pulsa-go"
 )
@@ -35,11 +35,11 @@ func TestErrorHttp(t *testing.T) {
 			expectedResult: mobilepulsa.ErrParseFailed,
 		},
 	}
-	
+
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			err := mobilepulsa.ErrorHttp([]byte(tc.resBody))
-			
+
 			assert.Equal(t, tc.expectedResult.Error(), err.Error())
 		})
 	}

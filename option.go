@@ -26,7 +26,7 @@ type Option struct {
 // NewOption creates new Option parameter's for API Call
 func NewOption() *Option {
 	httpClient := &http.Client{}
-	
+
 	return &Option{
 		accessType: Development,
 		apiCall: &APIRequestImplementation{
@@ -87,11 +87,11 @@ func (o *Option) Valid() error {
 	if o.apiKey == "" || reflect.ValueOf(o.apiKey).IsZero() {
 		return ErrAPIKeyNil
 	}
-	
+
 	if o.userName == "" || reflect.ValueOf(o.userName).IsZero() {
 		return ErrUsernameNil
 	}
-	
+
 	return nil
 }
 
@@ -100,9 +100,9 @@ func (o *Option) Valid() error {
 func (o *Option) Sign(c string) string {
 	val := fmt.Sprintf("%s%s%s", o.userName, o.apiKey, c)
 	data := []byte(val)
-	
+
 	hash := md5.New()
 	hash.Write(data)
-	
+
 	return hex.EncodeToString(hash.Sum(nil))
 }

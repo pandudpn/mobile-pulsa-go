@@ -4,7 +4,7 @@ import (
 	"context"
 	"net/http"
 	"testing"
-	
+
 	mobilepulsa "github.com/pandudpn/mobile-pulsa-go"
 	"github.com/stretchr/testify/mock"
 )
@@ -15,7 +15,7 @@ type apiRequestMock struct {
 
 func (a *apiRequestMock) Call(ctx context.Context, httpMethod, url string, header http.Header, body interface{}, result interface{}) error {
 	a.Called(ctx, httpMethod, url, header, body, result)
-	
+
 	return nil
 }
 
@@ -49,18 +49,18 @@ func TestNewOption(t *testing.T) {
 			httpClient:  &http.Client{},
 		},
 	}
-	
+
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			apiRequestMockObj := new(apiRequestMock)
-			
+
 			opts := mobilepulsa.NewOption()
 			opts.SetUsername(tc.username)
 			opts.SetAPIKey(tc.apikey)
 			opts.SetHTTPClient(tc.httpClient)
 			opts.SetAPIRequest(apiRequestMockObj)
 			opts.Valid()
-			
+
 			if tc.development {
 				opts.SetAccessDevelopment()
 			} else {

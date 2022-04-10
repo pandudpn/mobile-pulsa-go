@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strings"
 	"testing"
-	
+
 	"github.com/go-playground/assert/v2"
 	mobilepulsa "github.com/pandudpn/mobile-pulsa-go"
 	"github.com/pandudpn/mobile-pulsa-go/pricelist"
@@ -22,13 +22,13 @@ func initTesting(apiRequestMockObj mobilepulsa.APIRequest) *mobilepulsa.Option {
 	opts.SetUsername("abc")
 	opts.SetAPIKey("abc")
 	opts.SetAPIRequest(apiRequestMockObj)
-	
+
 	return opts
 }
 
 func (a *apiRequestMock) Call(ctx context.Context, httpMethod, url string, header http.Header, body interface{}, result interface{}) error {
 	a.Called(ctx, httpMethod, url, header, body, result)
-	
+
 	if strings.Contains(url, "prepaid") {
 		result.(*mobilepulsa.PriceList).Data = mobilepulsa.DataPricelist{
 			PriceList: []mobilepulsa.DataPrepaid{
@@ -53,14 +53,14 @@ func (a *apiRequestMock) Call(ctx context.Context, httpMethod, url string, heade
 			},
 		}
 	}
-	
+
 	return nil
 }
 
 func TestGet(t *testing.T) {
 	apiRequestMockObj := new(apiRequestMock)
 	opts := initTesting(apiRequestMockObj)
-	
+
 	testCases := []struct {
 		name           string
 		context        context.Context
@@ -125,7 +125,7 @@ func TestGet(t *testing.T) {
 			expectedErr:    errors.New("missing required fields: Status"),
 		},
 	}
-	
+
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			var (
@@ -142,13 +142,13 @@ func TestGet(t *testing.T) {
 				tc.data,
 				&mobilepulsa.PriceList{},
 			)
-			
+
 			if tc.context == nil {
 				resp, err = pricelist.Get(tc.data, opts)
 			} else {
 				resp, err = pricelist.GetWithContext(tc.context, tc.data, opts)
 			}
-			
+
 			assert.Equal(t, tc.expectedResult, resp)
 			assert.Equal(t, tc.expectedErr, err)
 		})

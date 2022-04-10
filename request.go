@@ -32,7 +32,7 @@ func (a *APIRequestImplementation) Call(
 		err     error
 		reqBody []byte
 	)
-	
+
 	hasBody := body != nil || (reflect.ValueOf(body).Kind() != reflect.Ptr && !reflect.ValueOf(body).IsNil())
 	if hasBody {
 		reqBody, err = json.Marshal(body)
@@ -40,18 +40,18 @@ func (a *APIRequestImplementation) Call(
 			return err
 		}
 	}
-	
+
 	req, err := http.NewRequestWithContext(ctx, httpMethod, url, bytes.NewBuffer(reqBody))
 	if err != nil {
 		return err
 	}
-	
+
 	if header != nil {
 		req.Header = header
 	}
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("User-Agent", fmt.Sprintf("mobilepulsa-go/%s", version))
-	
+
 	return a.doRequest(req, result)
 }
 
@@ -61,20 +61,20 @@ func (a *APIRequestImplementation) doRequest(req *http.Request, result interface
 		return err
 	}
 	defer res.Body.Close()
-	
+
 	resBody, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		return err
 	}
-	
+
 	if res.StatusCode < 200 || res.StatusCode > 299 {
 		return ErrorHttp(resBody)
 	}
-	
+
 	err = json.Unmarshal(resBody, &result)
 	if err != nil {
 		return err
 	}
-	
+
 	return nil
 }
