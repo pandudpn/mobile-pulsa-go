@@ -1,5 +1,7 @@
 # MobilePulsa API Go Client
 
+[![Coverage Status](https://coveralls.io/repos/github/pandudpn/mobile-pulsa-go/badge.svg?branch=master)](https://coveralls.io/github/pandudpn/mobile-pulsa-go?branch=master)
+
 This is Unofficial Project created by [pandudpn](https://www.github.com/pandudpn).
 
 - [Documentation](#documentation)
