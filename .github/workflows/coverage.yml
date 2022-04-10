@@ -23,6 +23,8 @@ jobs:
           COVERALLS_TOKEN: ${{ secrets.REPOSITORY_TOKEN }}
         run: |
           go get github.com/mattn/goveralls
+          echo "gopath ya"
+          echo $(go env GOPATH)
           echo $GOPATH
           ls -la $GOPATH/bin
           $GOPATH/bin/goveralls -coverprofile=coverage.out -service=github
