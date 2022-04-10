@@ -38,8 +38,8 @@ const (
 	Asuransi
 )
 
-// priceListParam contains parameters for getting Product PriceList
-type priceListParam struct {
+// PriceListParam contains parameters for getting Product PriceList
+type PriceListParam struct {
 	Commands string  `json:"commands,omitempty"`
 	Status   string  `json:"status" validate:"required"`
 	Username string  `json:"username" validate:"required"`

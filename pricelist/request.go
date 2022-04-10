@@ -22,7 +22,7 @@ const (
 
 type request struct {
 	opts *mobilepulsa.Option
-	data *priceListParam
+	data *PriceListParam
 }
 
 func (r *request) GetPriceList(ctx context.Context) (*mobilepulsa.PriceList, error) {

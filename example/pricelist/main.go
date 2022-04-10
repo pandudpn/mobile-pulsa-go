@@ -14,7 +14,12 @@ func main() {
 	opts.SetUsername("username")
 	opts.SetAccessDevelopment()
 	
-	priceList, err := pricelist.GetWithContext(context.Background(), pricelist.Prepaid, "all", opts)
+	data := &pricelist.PriceListParam{
+		Status:  "all",
+		Service: pricelist.Prepaid,
+	}
+	
+	priceList, err := pricelist.GetWithContext(context.Background(), data, opts)
 	if err != nil {
 		log.Println(err)
 		return
