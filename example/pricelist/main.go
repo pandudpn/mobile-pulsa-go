@@ -10,8 +10,8 @@ import (
 
 func main() {
 	opts := mobilepulsa.NewOption()
-	opts.SetAPIKey("5576252b0081a24e")
-	opts.SetUsername("083875181609")
+	opts.SetAPIKey("api-key")
+	opts.SetUsername("username")
 	opts.SetAccessDevelopment()
 	
 	priceList, err := pricelist.GetWithContext(context.Background(), pricelist.Prepaid, "all", opts)
