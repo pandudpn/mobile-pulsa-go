@@ -23,7 +23,5 @@ jobs:
           COVERALLS_TOKEN: ${{ secrets.REPOSITORY_TOKEN }}
         run: |
           export GOPATH=$(go env GOPATH)
-          go get github.com/mattn/goveralls
-          echo $GOPATH
-          ls -la $GOPATH/bin
+          go install github.com/mattn/goveralls@latest
           $GOPATH/bin/goveralls -coverprofile=coverage.out -service=github
