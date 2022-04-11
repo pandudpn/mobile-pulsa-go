@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         go-version: [1.15, 1.16, 1.17, 1.18]
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest]
     name: Test Coverage on ${{ matrix.os }} @ Go ${{ matrix.go-version }}
     runs-on: ${{ matrix.os }}
     steps:
