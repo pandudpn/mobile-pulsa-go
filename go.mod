@@ -5,6 +5,7 @@ go 1.18
 require (
 	github.com/go-playground/assert/v2 v2.0.1
 	github.com/go-playground/validator/v10 v10.10.1
+	github.com/joho/godotenv v1.4.0
 	github.com/stretchr/testify v1.7.0
 )
 

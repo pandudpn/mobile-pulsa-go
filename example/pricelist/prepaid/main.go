@@ -1,12 +1,13 @@
 package main
 
 import (
+	"context"
 	"log"
 	"os"
 
 	_ "github.com/joho/godotenv/autoload"
 	mobilepulsa "github.com/pandudpn/mobile-pulsa-go"
-	"github.com/pandudpn/mobile-pulsa-go/topup"
+	"github.com/pandudpn/mobile-pulsa-go/pricelist"
 )
 
 func main() {
@@ -15,17 +16,16 @@ func main() {
 	opts.SetUsername(os.Getenv("IAK_USERNAME"))
 	opts.SetAccessDevelopment()
 
-	data := &topup.TopUpParam{
-		RefID:       "ref-id-123",
-		CustomerID:  "082222222",
-		ProductCode: "htelkomsel1000",
+	data := &pricelist.PriceListParam{
+		Status:  "all",
+		Service: pricelist.Prepaid,
 	}
 
-	topup, err := topup.CreatePayment(data, opts)
+	priceList, err := pricelist.GetWithContext(context.Background(), data, opts)
 	if err != nil {
-		log.Println("error create payment topup", err)
+		log.Println(err)
 		return
 	}
 
-	log.Println(topup)
+	log.Println(priceList)
 }
