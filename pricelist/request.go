@@ -9,12 +9,6 @@ import (
 )
 
 const (
-	// production
-	basePostpaidProduction string = "https://mobilepulsa.net"
-	basePrepaidProduction  string = "https://prepaid.iak.id"
-	// development
-	basePostpaidDevelopment string = "https://testpostpaid.mobilepulsa.net"
-	basePrepaidDevelopment  string = "https://prepaid.iak.dev"
 	// endpoint
 	priceListPostpaid string = "/api/v1/bill/check"
 	priceListPrepaid  string = "/api/pricelist"
@@ -38,14 +32,14 @@ func (r *request) GetPriceList(ctx context.Context) (*mobilepulsa.PriceList, err
 	}
 
 	if r.data.Service == Postpaid {
-		url = basePostpaidProduction + priceListPostpaid
+		url = mobilepulsa.BasePostpaidProduction + priceListPostpaid
 		if r.opts.GetAccessType() == mobilepulsa.Development {
-			url = basePostpaidDevelopment + priceListPostpaid
+			url = mobilepulsa.BasePostpaidDevelopment + priceListPostpaid
 		}
 	} else {
-		url = basePrepaidProduction + priceListPrepaid
+		url = mobilepulsa.BasePrepaidProduction + priceListPrepaid
 		if r.opts.GetAccessType() == mobilepulsa.Development {
-			url = basePrepaidDevelopment + priceListPrepaid
+			url = mobilepulsa.BasePrepaidDevelopment + priceListPrepaid
 		}
 	}
 	r.data.Sign = r.opts.Sign("pl")
