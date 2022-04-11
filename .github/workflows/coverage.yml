@@ -10,9 +10,9 @@ jobs:
   test:
     strategy:
       matrix:
-        go-version: ["1.14", "1.15", "1.16", "1.17", "1.18"]
+        go-version: [1.15, 1.16, 1.17, 1.18]
         os: [ubuntu-latest, macos-latest, windows-latest]
-    name: Test with Coverage
+    name: Test Coverage on ${{ matrix.os }} @ Go ${{ matrix.go-version }}
     runs-on: ${{ matrix.os }}
     steps:
       - name: Set up Go
