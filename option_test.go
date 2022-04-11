@@ -60,6 +60,9 @@ func TestNewOption(t *testing.T) {
 			opts.SetHTTPClient(tc.httpClient)
 			opts.SetAPIRequest(apiRequestMockObj)
 			opts.Valid()
+			opts.GetUsername()
+			opts.GetAccessType()
+			opts.Sign("")
 
 			if tc.development {
 				opts.SetAccessDevelopment()
