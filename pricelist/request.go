@@ -42,7 +42,6 @@ func (r *request) GetPriceList(ctx context.Context) (*mobilepulsa.PriceList, err
 			url = mobilepulsa.BasePrepaidDevelopment + priceListPrepaid
 		}
 	}
-	r.data.Sign = r.opts.Sign("pl")
 
 	err = r.opts.GetAPIRequest().Call(ctx, http.MethodPost, url, header, r.data, &priceList)
 	if err != nil {
