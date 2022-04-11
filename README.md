@@ -1,6 +1,6 @@
 # MobilePulsa API Go Client
 
-[![Coverage Status](https://coveralls.io/repos/github/pandudpn/mobile-pulsa-go/badge.svg?branch=master)](https://coveralls.io/github/pandudpn/mobile-pulsa-go?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/pandudpn/mobile-pulsa-go/badge.png?branch=master)](https://coveralls.io/github/pandudpn/mobile-pulsa-go?branch=master)
 
 This is Unofficial Project for Prepaid or Postpaid Product in Indonesia. This is created by [pandudpn](https://www.github.com/pandudpn).
 
