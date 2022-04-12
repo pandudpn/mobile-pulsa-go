@@ -67,14 +67,14 @@ func (a *APIRequestImplementation) doRequest(req *http.Request, result interface
 		return err
 	}
 
-	errHttp := ErrorHttp(resBody)
-	if errHttp != nil {
-		return errHttp
-	}
-
 	err = json.Unmarshal(resBody, &result)
 	if err != nil {
 		return err
+	}
+
+	errHttp := ErrorHttp(resBody)
+	if errHttp != nil {
+		return errHttp
 	}
 
 	return nil
