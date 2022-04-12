@@ -32,7 +32,7 @@ func TestErrorHttp(t *testing.T) {
 		{
 			name:           "success handle error un-mapped key and get ErrParseFailed",
 			resBody:        `{"data": {"rc": "210", "message": "INVALID DATA", "status": 2}}`,
-			expectedResult: mobilepulsa.ErrParseFailed,
+			expectedResult: nil,
 		},
 	}
 
@@ -40,7 +40,11 @@ func TestErrorHttp(t *testing.T) {
 		t.Run(tc.name, func(t *testing.T) {
 			err := mobilepulsa.ErrorHttp([]byte(tc.resBody))
 
-			assert.Equal(t, tc.expectedResult.Error(), err.Error())
+			if err != nil {
+				assert.Equal(t, tc.expectedResult.Error(), err.Error())
+			} else {
+				assert.Equal(t, tc.expectedResult, err)
+			}
 		})
 	}
 }
