@@ -67,8 +67,9 @@ func (a *APIRequestImplementation) doRequest(req *http.Request, result interface
 		return err
 	}
 
-	if res.StatusCode < 200 || res.StatusCode > 299 {
-		return ErrorHttp(resBody)
+	errHttp := ErrorHttp(resBody)
+	if errHttp != nil {
+		return errHttp
 	}
 
 	err = json.Unmarshal(resBody, &result)
