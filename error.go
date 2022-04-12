@@ -162,7 +162,7 @@ func getErrorCode(v string) ErrorCode {
 	// for handle error go-routine
 	errCode, ok := mapErrorCode[v]
 	if !ok {
-		return ErrParseFailed
+		return nil
 	}
 
 	return errCode
